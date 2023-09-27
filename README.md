@@ -13,16 +13,16 @@ You can also pipe the output directly to other tools like puredns:
 
 The above example is for dns bruteforcing. Other applications can be:
 ### Username Enumeration
-```wordlistweaver -w usernames.txt:USERNAME -w domains.txt:DOMAIN --input USERNAME@DOMAIN```
+```wordlistweaver -w usernames.txt:USERNAME -w domains.txt:DOMAIN -input USERNAME@DOMAIN```
 
 ### SSH Brute-Forcing
-```wordlistweaver -w usernames.txt:USERNAME -w passwords.txt:PASSWORD --input ssh://USERNAME:PASSWORD@example.com```
+```wordlistweaver -w usernames.txt:USERNAME -w passwords.txt:PASSWORD -input ssh://USERNAME:PASSWORD@example.com```
 
 ### Customized Payloads
-```wordlistweaver -w tags.txt:TAG -w eventhandlers.txt:EVENTHANDLER --input 'http://example.com/search?query=<TAG EVENTHANDLER="alert(1)" />'```
+```wordlistweaver -w tags.txt:TAG -w eventhandlers.txt:EVENTHANDLER -input 'http://example.com/search?query=<TAG EVENTHANDLER="alert(1)" />'```
 
 ### File Inclusions
-```wordlistweaver -w files.txt:FILE -w paths.txt:PATH --input 'http://example.com/?file=FILE&path=PATH```
+```wordlistweaver -w files.txt:FILE -w paths.txt:PATH -input 'http://example.com/?file=FILE&path=PATH```
 
 # Command line options
 ```
