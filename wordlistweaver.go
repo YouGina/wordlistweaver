@@ -1,12 +1,35 @@
 package main
 
 import (
+	"os"
 	"flag"
 	"fmt"
 	"io/ioutil"
 	"log"
 	"strings"
 )
+
+func init() {
+	flag.Usage = func() {
+		h := []string{
+			"",
+			"Create and combine wordlist as if you are fuzzing using `clusterbomb` mode",
+			"",
+			"Usage:",
+			"    wordlistweaver [options]",
+			"",
+			"Options:",
+			"    -w\t\t <string> 	 Wordlist files in the format 'path:placeholder'",
+			"    -input\t <string>  	 Input string with placeholders",
+			"",
+			"Example:",
+			"wordlistweaver -input admin.w1.dev.w2.user.w3.dell.com -w dell-wordlists/aaa.txt:w1 -w dell-wordlists/bbb.txt:w2 -w dell-wordlists/ccc.txt:w3",
+			"",
+			"",
+		}
+		fmt.Fprint(os.Stderr, strings.Join(h, "\n"))
+	}
+}
 
 func main() {
 	var wordlists []string
