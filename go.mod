@@ -1,1 +1,1 @@
-module github.com/YouGina/wordlisweaver
+module github.com/YouGina/wordlistweaver
