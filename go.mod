@@ -1,3 +1,3 @@
-module github.com/YouGina/wordlistweaver
+module wordlistweaver
 
 go 1.20
