@@ -11,6 +11,18 @@ Create and combine wordlist as if you are fuzzing using `clusterbomb` mode:
 You can also pipe the output directly to other tools like puredns:
 ```wordlistweaver -input admin.w1.dev.w2.user.w3.dell.com -w dell-wordlists/aaa.txt:w1 -w dell-wordlists/bbb.txt:w2 -w dell-wordlists/ccc.txt:w3 | puredns resolve```
 
+The above example is for dns bruteforcing. Other applications can be:
+### Username Enumeration
+```wordlistweaver -w usernames.txt:USERNAME -w domains.txt:DOMAIN --input USERNAME@DOMAIN```
+
+### SSH Brute-Forcing
+```wordlistweaver -w usernames.txt:USERNAME -w passwords.txt:PASSWORD --input ssh://USERNAME:PASSWORD@example.com```
+
+### Customized Payloads
+```wordlistweaver -w tags.txt:TAG -w eventhandlers.txt:EVENTHANDLER --input 'http://example.com/search?query=<TAG EVENTHANDLER="alert(1)" />'```
+
+### File Inclusions
+```wordlistweaver -w files.txt:FILE -w paths.txt:PATH --input 'http://example.com/?file=FILE&path=PATH```
 
 # Command line options
 ```
@@ -24,3 +36,8 @@ Options:
     -input       <string>        Input string with placeholders
 
 ```
+
+# Idea and Development
+During collaboration between [@prime31](https://x.com/prime31/) and me ([@Yougina](https://x.com/YouGina/)), [@prime31](https://x.com/prime31/) came up with the idea for this tool to quickly generate wordlist to bruteforce domains without the need of big permutation files. As shown above we found multiple other applications for which this can be useful.  
+
+
