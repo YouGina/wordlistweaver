@@ -2,7 +2,7 @@
 A tool to create custom wordlists similar to how fuzzers work
 
 # Installation
-go install github.com/YouGina/wordlistweaver@latest
+go install github.com/YouGina/wordlistweaver/cmd/wordlistweaver@latest
 
 # Example usage
 Create and combine wordlist as if you are fuzzing using `clusterbomb` mode:
