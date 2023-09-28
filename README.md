@@ -37,7 +37,7 @@ Options:
 
 ```
 
-# Idea and Development
+# Idea and application
 During collaboration between [@prime31](https://x.com/prime31/) and me ([@Yougina](https://x.com/YouGina/)), [@prime31](https://x.com/prime31/) came up with the idea for this tool to quickly generate wordlist to bruteforce domains without the need of big permutation files. As shown above we found multiple other applications for which this can be useful.  
 
 
