@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
 	"os"
 	"flag"
 	"fmt"
@@ -20,7 +21,7 @@ func init() {
 			"",
 			"Options:",
 			"    -w\t\t <string> 	 Wordlist files in the format 'path:placeholder'",
-			"    -input\t <string>  	 Input string with placeholders",
+			"    -input\t <string>  	 Input string with placeholders. If not provided, input is read from stdin.",
 			"",
 			"Example:",
 			"wordlistweaver -input admin.w1.dev.w2.user.w3.dell.com -w dell-wordlists/aaa.txt:w1 -w dell-wordlists/bbb.txt:w2 -w dell-wordlists/ccc.txt:w3",
@@ -33,16 +34,29 @@ func init() {
 
 func main() {
 	var wordlists []string
-
-	// Define command-line flags for wordlists
+	
+	// Define command-line flags for wordlists and input
 	flag.Var((*wordlistSlice)(&wordlists), "w", "Wordlist files in the format 'path:placeholder'")
 
 	inputFlag := flag.String("input", "", "Input string with placeholders")
 	flag.Parse()
 
-	if *inputFlag == "" {
-		log.Fatal("Please provide an input string with placeholders")
-	}
+	// Determine input source (from stdin or from -input parameter)
+	var inputs []string
+	
+	fi, stdInputerr := os.Stdin.Stat()
+	
+	if *inputFlag != "" {
+		inputs = append(inputs, *inputFlag)
+	} else {
+		scanner := bufio.NewScanner(os.Stdin)
+		for scanner.Scan() {
+			inputs = append(inputs, scanner.Text())
+		}
+		if err := scanner.Err(); err != nil {
+			log.Fatalf("Error reading input from stdin: %v", err)
+		}
+	} 
 
 	// Read and load wordlists
 	wordlistData := make(map[string][]string)
@@ -64,10 +78,11 @@ func main() {
 		wordlistData[placeholder] = words
 	}
 
-	// Generate wordlist combinations
-	combinations := generateCombinations(*inputFlag, wordlistData)
-	for _, combo := range combinations {
-		fmt.Println(combo)
+	for _, inputLine := range inputs {
+		combinations := generateCombinations(inputLine, wordlistData)
+		for _, combo := range combinations {
+			fmt.Println(combo)
+		}
 	}
 }
 
