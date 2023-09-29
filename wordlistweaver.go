@@ -2,11 +2,10 @@ package main
 
 import (
 	"bufio"
-	"os"
 	"flag"
 	"fmt"
-	"io/ioutil"
 	"log"
+	"os"
 	"strings"
 )
 
@@ -34,7 +33,7 @@ func init() {
 
 func main() {
 	var wordlists []string
-	
+
 	// Define command-line flags for wordlists and input
 	flag.Var((*wordlistSlice)(&wordlists), "w", "Wordlist files in the format 'path:placeholder'")
 
@@ -43,7 +42,7 @@ func main() {
 
 	// Determine input source (from stdin or from -input parameter)
 	var inputs []string
-	
+
 	if *inputFlag != "" {
 		inputs = append(inputs, *inputFlag)
 	} else {
@@ -54,7 +53,7 @@ func main() {
 		if err := scanner.Err(); err != nil {
 			log.Fatalf("Error reading input from stdin: %v", err)
 		}
-	} 
+	}
 
 	// Read and load wordlists
 	wordlistData := make(map[string][]string)
@@ -68,7 +67,7 @@ func main() {
 		path := parts[0]
 		placeholder := parts[1]
 
-		content, err := ioutil.ReadFile(path)
+		content, err := os.ReadFile(path)
 		if err != nil {
 			log.Fatalf("Error reading %s: %v", path, err)
 		}
