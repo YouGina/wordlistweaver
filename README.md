@@ -11,6 +11,11 @@ Create and combine wordlist as if you are fuzzing using `clusterbomb` mode:
 You can also pipe the output directly to other tools like puredns:
 ```wordlistweaver -input admin.w1.dev.w2.user.w3.dell.com -w dell-wordlists/aaa.txt:w1 -w dell-wordlists/bbb.txt:w2 -w dell-wordlists/ccc.txt:w3 | puredns resolve```
 
+If you omit the -input argument it will take input from stdin. This is useful if you for example have a list of subdomains and want to replace specific terms. For example we can do:
+```
+cat subdomains | ./wordlistweaver -w environments.txt:dev -w environments.txt:api
+```
+
 The above example is for dns bruteforcing. Other applications can be:
 ### Username Enumeration
 ```wordlistweaver -w usernames.txt:USERNAME -w domains.txt:DOMAIN -input USERNAME@DOMAIN```
@@ -33,7 +38,7 @@ Usage:
 
 Options:
     -w           <string>        Wordlist files in the format 'path:placeholder'
-    -input       <string>        Input string with placeholders
+    -input       <string>        Input string with placeholders. If not provided, input is read from stdin.
 
 ```
 
