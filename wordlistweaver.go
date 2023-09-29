@@ -44,8 +44,6 @@ func main() {
 	// Determine input source (from stdin or from -input parameter)
 	var inputs []string
 	
-	fi, stdInputerr := os.Stdin.Stat()
-	
 	if *inputFlag != "" {
 		inputs = append(inputs, *inputFlag)
 	} else {
